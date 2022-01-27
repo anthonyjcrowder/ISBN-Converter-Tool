@@ -36,7 +36,7 @@ public class ISBNConversion {
 
         // calculate check digit
         int lastdigit = sum % 11;
-        int checkdigit = 11 - lastdigit;
+        int checkdigit = 11 - lastdigit; // checkdigit is equaling 88 if 11-lastdigit = 10. Need to fix
 
         //check last digit for x
         if (checkdigit == 10) {
@@ -47,13 +47,14 @@ public class ISBNConversion {
             sum += (checkdigit);
 
         // display the 10 digit isbn
-        System.out.print("10 Digit ISBN: ");
-        for (int i = 0; i < convert.length() - 1; i++) {
-            System.out.print(convert.charAt(i));
-       }
-        if (checkdigit != convert.charAt(9)) {
-            System.out.println(checkdigit);
-        }
+        System.out.print("10 Digit ISBN: " + convert +  checkdigit + "\n");
+//        System.out.print("10 Digit ISBN: ");
+//        for (int i = 0; i < convert.length() - 1; i++) {
+//            System.out.print(convert.charAt(i));
+//       }
+//        if (checkdigit != convert.charAt(9)) {
+//            System.out.println(checkdigit);
+//        }
 
         return (sum % 11 == 0);
     }
@@ -79,6 +80,11 @@ public class ISBNConversion {
         for (int i = 0; i < ISBN13.length() - 1; i++){
 
             int ch = ISBN13.charAt(i) - '0'; // return integer value of character in string
+
+            //atoi - Asci to Int
+//            char c = '4';
+//            int c_int = Integer.parseInt(c + "");
+
             if (ch < 0 || ch > 9)
                 return false;
 
@@ -112,12 +118,14 @@ public class ISBNConversion {
             sum += (ISBN13.charAt(12));
         }
 
-        System.out.print("13 Digit ISBN: ");
-        for (int i = 0; i < ISBN13.length() - 1; i++) {
-            System.out.print(ISBN13.charAt(i));
-        }
-        System.out.print(checkdigit);
-        System.out.println(" ");
+       //return isbn
+        System.out.print("13 Digit ISBN: " + ISBN13 + checkdigit);
+//        System.out.print("13 Digit ISBN: ");
+//        for (int i = 0; i < ISBN13.length() - 1; i++) {
+//            System.out.print(ISBN13.charAt(i));
+//        }
+//        System.out.print(checkdigit);
+//        System.out.println(" ");
 
         return (true);
     }
