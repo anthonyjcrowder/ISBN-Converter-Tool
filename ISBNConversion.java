@@ -37,23 +37,30 @@ public class ISBNConversion {
         // calculate check digit
         int lastdigit = sum % 11;
         int checkdigit = 11 - lastdigit; // checkdigit is equaling 88 if 11-lastdigit = 10. Need to fix- 88 is ascii for X
-        char convertedChar = 'X';
+        //char convertedChar = 'X';
         //check last digit for x
-        if (checkdigit == 88) {
+        if (checkdigit == 10) {
 
-            checkdigit = convertedChar;
+            checkdigit = 'X';
 
             sum += 10;
-        } else
-            sum += (checkdigit);
-
-        // display the 10 digit isbn
-        if (checkdigit == 10){ //if checkdigit is 10, display X
 
             System.out.print("10 Digit ISBN: " + convert.substring(0,9) +  "X" + "\n");
-        } else
 
-        System.out.print("10 Digit ISBN: " + convert +  checkdigit + "\n");
+        }
+        // if checkdigit = 11, check digit is actually 0
+        else if (checkdigit == 11){
+
+            checkdigit = 0;
+
+            System.out.print("10 Digit ISBN: " + convert.substring(0,9) + checkdigit + "\n");
+        }
+
+        else {
+            sum += (checkdigit);
+
+            System.out.print("10 Digit ISBN: " + convert.substring(0, 9) + checkdigit + "\n");
+        }
 //        System.out.print("10 Digit ISBN: ");
 //        for (int i = 0; i < convert.length() - 1; i++) {
 //            System.out.print(convert.charAt(i));
@@ -117,15 +124,15 @@ public class ISBNConversion {
             checkdigit = 10 - checkdigit;
         }
 
-       if (lastdigit == 'X') {
+        if (lastdigit == 'X') {
             lastdigit = 10;
             sum+= lastdigit;
         } else {
             sum += (ISBN13.charAt(12));
         }
 
-       //return isbn
-        System.out.print("13 Digit ISBN: " + ISBN13 + checkdigit);
+        //return isbn
+        System.out.print("13 Digit ISBN: " + ISBN13.substring(0,12) + checkdigit + "\n");
 //        System.out.print("13 Digit ISBN: ");
 //        for (int i = 0; i < ISBN13.length() - 1; i++) {
 //            System.out.print(ISBN13.charAt(i));
@@ -148,7 +155,7 @@ public class ISBNConversion {
 
             System.out.println("Valid ISBN");
 
-       } else if (ISBN10to13(isbn)){
+        } else if (ISBN10to13(isbn)){
 
             System.out.println("Valid ISBN");
         } else
