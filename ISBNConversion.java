@@ -36,17 +36,23 @@ public class ISBNConversion {
 
         // calculate check digit
         int lastdigit = sum % 11;
-        int checkdigit = 11 - lastdigit; // checkdigit is equaling 88 if 11-lastdigit = 10. Need to fix
-
+        int checkdigit = 11 - lastdigit; // checkdigit is equaling 88 if 11-lastdigit = 10. Need to fix- 88 is ascii for X
+        char convertedChar = 'X';
         //check last digit for x
-        if (checkdigit == 10) {
+        if (checkdigit == 88) {
 
-            checkdigit = 'X';
+            checkdigit = convertedChar;
+
             sum += 10;
         } else
             sum += (checkdigit);
 
         // display the 10 digit isbn
+        if (checkdigit == 10){ //if checkdigit is 10, display X
+
+            System.out.print("10 Digit ISBN: " + convert.substring(0,9) +  "X" + "\n");
+        } else
+
         System.out.print("10 Digit ISBN: " + convert +  checkdigit + "\n");
 //        System.out.print("10 Digit ISBN: ");
 //        for (int i = 0; i < convert.length() - 1; i++) {
